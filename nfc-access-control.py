@@ -5,6 +5,7 @@
 
 from __future__ import print_function
 import nfc
+from nfc.clf import RemoteTarget
 import sys
 import time
 import datetime
@@ -19,12 +20,15 @@ import RPi.GPIO as GPIO
 import resource
 
 #Set up file logging
-logging.basicConfig(filename="door.log", level=logging.DEBUG, format="%(asctime)s : %(levelname)s - %(message)s")
+logging.basicConfig(filename="/var/log/door.log", level=logging.DEBUG, format="%(asctime)s : %(levelname)s - %(message)s")
 
-verbose = False
-mask = 0xff
-max_device_count = 1
-max_target_count = 1
+# The string we use to open the NFC reader with nfcpy.
+# We assume the device is connected with a USB->serial adapter,
+# which means it should be located at /dev/ttyUSB0 or similar.
+# Using 'tty:USB' seems to scan through all /dev/ttyUSB* devices until it finds a reader, which
+# is probably helpful, in case it randomly jumps to another location (e.g. ttyUSB0->ttyUSB1),
+# as USB serial devices sometimes do.
+nfcReaderDev = 'tty:USB'
 
 #GPIO assignments
 innerDoorPin = 11
@@ -34,25 +38,16 @@ exitButtonPin = 12
 #Time allowed for door unlock state.
 unlockDelay = 10
 
-hardCodedCards = [
-	'12345678', #someone's hardcoded card, if needed?
-]
-
 # Return value for this program.  Non-zero is an error.
 ret = 0
 
 class poller (threading.Thread):
-	def __init__(self, threadID, nfc, pnd, nm): #nfc, pnd):
+	def __init__(self, threadID, clf):
 		threading.Thread.__init__(self)
 		self.threadID = threadID
-		self.nfc = nfc
-		self.pnd = pnd
-		self.nm = nm
-		#self.res = None
-		#self.ant = None
+		self.clf = clf
 
 	def run(self):
-		#print("Starting poll for ", self.threadID, ": ", self.nfc.device_get_connstring(self.pnd))
 		self.poll_reader()
 
 	def poll_reader(self):
@@ -61,44 +56,33 @@ class poller (threading.Thread):
 		while(True):
 			# Open the door for {unlockDelay} seconds if we get a request to exit event from the button on the inside.
 			if GPIO.event_detected(exitButtonPin):
-			#if GPIO.input(exitButtonPin):
 				GPIO.output(innerDoorPin, GPIO.LOW)
 				print("Someone wants to exit...")
 				logging.debug("Exit requested!")
 				time.sleep(unlockDelay)
 				GPIO.output(innerDoorPin, GPIO.HIGH)
-			# List ISO14443A targets
+			# Scan for NFC targets
 			try:
-				nt = self.nfc.target()
-				# This method blocks constantly, and crashes the Pi randomly.
-				#ret = self.nfc.initiator_select_passive_target(self.pnd, self.nm, 0, 0, nt)
-				# This less-awful method seems to eat memory like popcorn, and if not handled gracefully, will ultimately crash the Pi.
-				res, ant = self.nfc.initiator_list_passive_targets(self.pnd, self.nm, max_target_count)
-				#print("sel_pass_targ: ", ret)
-			except:
-				raise
-			#if (ret > 0):
-			if (verbose or (res > 0)):
-				#print(res, self.threadID, ": ISO14443A passive target(s) found")
-			#for n in range(res):
+				target = self.clf.sense(RemoteTarget('106A'), RemoteTarget('106B'), RemoteTarget('212F'))
+			except IOError as e:
+				print("Caught exception:", e)
+				logging.debug("Poller: caught exception: %s", e)
+
+			if target is not None and target.sdd_res is not None:
 				cardUID = ""
-				#userPass = ""
-					
-				#self.nfc.print_nfc_target(ant[n], verbose)
-				cardUID = ant[0].nti.nai.abtUid.hex()[0:8]
-				#cardUID = nt.nti.nai.abtUid.hex()[0:8]
-				#print(self.threadID, ": Got card UID:", cardUID)
-				#logging.debug("Got card UID %s", cardUID)
-				#accessFilter = ldap.filter.filter_format('(&(cn=*)(description=%s)(postalAddress=%s))', [cardUID, userPass])
-				
+				# Convert the card ID from hexadecimal into a string, and limit it to the first 8 characters.
+				cardUID = target.sdd_res.hex()[0:8]
+				# Do LDAP lookup for 24-hour members with this card ID in their employeeNumber field.
+				# Format LDAP query string
 				accessFilter = ldap.filter.filter_format('(&(cn=*)(memberOf=cn=24hour,cn=groups,dc=hub,dc=allhandsactive,dc=com)(employeeNumber=%s))', [cardUID])
-				l = ldap.initialize("ldap://<THELDAPSERVERIP>")
-				l.simple_bind_s("uid=root,cn=users,dc=hub,dc=allhandsactive,dc=com","<THELDAPPASSWORD>")
+				# Attempt to connect to the LDAP server with the provided credentials 
+				l = ldap.initialize("ldap://<THE_LDAP_SERVER_ADDRESS>")
+				l.simple_bind_s("uid=root,cn=users,dc=hub,dc=allhandsactive,dc=com","<THE_LDAP_SERVER_PASSWORD>")
+				# Run the LDAP query
 				ldap_res = l.search_s('cn=users,dc=hub,dc=allhandsactive,dc=com', ldap.SCOPE_SUBTREE, accessFilter, ['uid'])
 				if(len(ldap_res) > 0):
 					logging.debug("LDAP results: %s", ldap_res)
 					for dn, entry in ldap_res:
-						#if(cardUID in hardCodedCards):
 						logging.debug("Granted!: %s %s", cardUID, entry['uid'])
 						print("Granted!: ", cardUID, entry['uid'])
 						GPIO.output(innerDoorPin, GPIO.LOW)
@@ -109,38 +93,9 @@ class poller (threading.Thread):
 						GPIO.add_event_detect(exitButtonPin, GPIO.RISING, bouncetime = unlockDelay*1000)
 				else:
 					print("Denied!: ", cardUID)
-				
-				#logging.debug(mem_top(limit=20,width=2000))
-				
+					logging.debug("Denied!: %s", cardUID)
 				l.unbind()
-					#Get user input for password -- 20 second timeout.
-					#This password stuff has been scrubbed since nobody was super gung-ho about adding a second authentication factor.  It's here for posterity, I guess.
-					#TODO: Figure out a thread-safe way to do this! Currently if more than one thread is waiting for input, indeterminate results may occur.
-					#if(self.threadID != "1"):
-						# Clear out input buffer before taking raw input.
-						#termios.tcflush(sys.stdin,termios.TCIFLUSH)
-						#print(self.threadID, ": Waiting for password!")
-						#i, o, e = select.select([sys.stdin], [], [], 20)
-						#if(i):
-						#	userPass = sys.stdin.readline().strip()
-							#print(self.threadID, ": Password is:", userPass)
-						#else:
-							#print(self.threadID, ": Password timeout")
-							
-						#accessFilter = ldap.filter.filter_format('(&(cn=*)(description=%s)(<PASSWORDFIELD>=%s))', [cardUID, userPass])
-					#else:
-					#	accessFilter = ldap.filter.filter_format('(&(cn=*)(description=%s))', [cardUID])
-					#TODO: LDAP requests includes some kind of group selector? (e.g. memberOf).
-					#TODO: Setup up SSL LDAP to secure password data.
-					#l = ldap.initialize("ldap://<THELDAPSERVERIP>")
-					#l.simple_bind_s("","")
-					#ldap_res = l.search_s('ou=users,dc=<SOMEDC>', ldap.SCOPE_SUBTREE, accessFilter)
-					#print("Results: ", ldap_res)
-					#if(len(ldap_res) > 0):
-					#	print("Hooray!")
-					#else:
-					#	print("Boo!")
-					#l.unbind()
+			# Poll card reader once per second
 			time.sleep(1)
 
 try:
@@ -148,42 +103,24 @@ try:
 	GPIO.setup([innerDoorPin,outerDoorPin], GPIO.OUT, initial=GPIO.HIGH)
 	GPIO.setup(exitButtonPin, GPIO.IN)
 
-	context = nfc.init()
+	# Initialize the NFC reader.
+	clf = nfc.ContactlessFrontend()
+	clf.open(nfcReaderDev)
 
-	# Display libnfc version
-	#print("%s uses libnfc %s" %( sys.argv[0], nfc.__version__))
-
-	connstrings = nfc.list_devices(context, max_device_count)
-	szDeviceFound = len(connstrings)
-
-	pnd = None
-	
-	if len(connstrings) == 0:
+	if clf.device is None:
 		raise Exception("No NFC devices found!")
 
-	for i in range(szDeviceFound):
-		pnd = nfc.open(context, connstrings[i]);
-		if pnd is None:
-			continue
-
-	if(nfc.initiator_init(pnd)<0):
-		nfc.perror(pnd, "nfc_initiator_init")
-		raise Exception("Unable to initialize NFC reader!")
-
-	print("NFC reader:", nfc.device_get_name(pnd), "(", nfc.device_get_connstring(pnd), ") opened")
-
-	
-	nm = nfc.modulation()
-	nm.nmt = nfc.NMT_ISO14443A
-	nm.nbr = nfc.NBR_106
+	logging.debug("NFC reader: %s opened", clf.device)
 	
 	try:
 		# Just keep reading the card information indefinitely.
 		while(True):
-			myPoller = poller(str(0), nfc, pnd, nm)
+			# Set up thread to run the card polling loop.
+			myPoller = poller(str(0), clf)
 			myPoller.daemon = True
 			myPoller.start()
 			print("Poller started -- Main thread monitoring poller thread...")
+			logging.debug("Poller started -- Main thread monitoring poller thread.")
 			
 			while(True):
 				# Check if the thread is still alive, and if not we should restart it.
@@ -196,37 +133,48 @@ try:
 					raise MemoryError("Exceeded allowed memory usage.")
 
 				# Print a time-stamped heartbeat so I know this POS hasn't crashed yet.
-				tstamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-				print(tstamp, ": Still alive...")
+				#tstamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+				#print(tstamp, ": Still alive...")
+				# Wait another 60 seconds until we check on the thread again.
 				time.sleep(60)
-			
-			# Do nothing until myPoller fails somehow.
-			#myPoller.join()
+
 	except MemoryError:
 		raise
 	except Exception as e:
 		print("Caught exception: ", e)
+		logging.debug("Poller loop caught exception: %s", e)
 	finally:
 		# Clear event detection on the exit button, so we don't have problems trying to add another.
 		GPIO.remove_event_detect(exitButtonPin)
-		print("Poller thread exited -- Attempting to restart...")
+		print("Poller thread exited due to exception")
+		logging.debug("Poller thread exited due to exception")
 except MemoryError as e:
 	print("Memory Error: ", e)
-	logging.exception("Memory error!")
+	logging.exception("%s: Memory error!", e)
 	ret = 42
 	raise
 except (KeyboardInterrupt, SystemExit):
 	print("Exiting gracefully!")
-	logging.exception("Exited gracefully!")
+	logging.exception("Exiting gracefully!")
 except Exception as e:
 	print(e, ": Exiting ungracefully...")
-	logging.exception("Exited ungracefully!")
+	logging.exception("%s: Exiting ungracefully!", e)
 	ret = 1
 finally:
-	# Stop all pollers.
+	logging.debug("Shutting down...")
+	# Attempt to terminate the poller thread, 10 second timeout
+	if myPoller is not None and myPoller.is_alive():
+		myPoller.join(10)
+		if myPoller.is_alive() is True:
+			logging.debug("...Couldn't terminate poller thread -- exiting anyway")
+		else:
+			logging.debug("...Shut down poller thread")
+	# Clean up GPIOs
 	GPIO.cleanup([innerDoorPin,outerDoorPin,exitButtonPin])
-	# This often causes a segfault which screws stuff up for a clean exit.  Not sure how necessary it is since we've exited anyhow.
-	#if pnd is not None:
-	#	nfc.close(pnd)
-	nfc.exit(context)
+	logging.debug("...Clean up GPIO")
+	# Close card reader.
+	# This is important, else might have to physically reconnect the reader's USB plug to successfully pick it up again with clf.open().
+	if clf is not None:
+		clf.close()
+		logging.debug("...Closing NFC reader device")
 	sys.exit(ret)

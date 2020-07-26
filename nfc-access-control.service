@@ -1,0 +1,11 @@
+[Unit]
+Description=NFC Access Control
+
+[Service]
+ExecStart=/usr/sbin/nfc-access-control
+RemainAfterExit=no
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
