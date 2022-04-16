@@ -1,0 +1,8 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP lolinv3
+D ESP8266 LoLin v3 module
+K ESP8266 LoLin
+$ENDCMP
+#
+#End Doc Library
