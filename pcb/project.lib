@@ -1,11 +1,11 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# lolinv3
+# NodeMCUv3
 #
-DEF lolinv3 U 0 40 Y Y 1 F N
+DEF NodeMCUv3 U 0 40 Y Y 1 F N
 F0 "U" 350 200 50 H V C CNN
-F1 "lolinv3" 350 100 50 H V C CNN
+F1 "NodeMCUv3" 350 100 50 H V C CNN
 F2 "project:lolinv3" 400 100 50 H I C CNN
 F3 "" 400 100 50 H I C CNN
 DRAW

@@ -283,11 +283,11 @@ X VBUS 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# project_lolinv3
+# project_NodeMCUv3
 #
-DEF project_lolinv3 U 0 40 Y Y 1 F N
+DEF project_NodeMCUv3 U 0 40 Y Y 1 F N
 F0 "U" 350 200 50 H V C CNN
-F1 "project_lolinv3" 350 100 50 H V C CNN
+F1 "project_NodeMCUv3" 350 100 50 H V C CNN
 F2 "project:lolinv3" 400 100 50 H I C CNN
 F3 "" 400 100 50 H I C CNN
 DRAW

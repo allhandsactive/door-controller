@@ -14,17 +14,6 @@ Comment3 ""
 Comment4 "Marion Anderson"
 $EndDescr
 $Comp
-L project:lolinv3 U?
-U 1 1 625B736B
-P 5850 3350
-F 0 "U?" H 6200 3575 50  0000 C CNN
-F 1 "lolinv3" H 6200 3484 50  0000 C CNN
-F 2 "project:lolinv3" H 6250 3450 50  0001 C CNN
-F 3 "${KIPRJMOD}/../docs/NodeMCU-V3.pdf" H 6250 3450 50  0001 C CNN
-	1    5850 3350
-	1    0    0    -1  
-$EndComp
-$Comp
 L Connector:Conn_01x04_Male J?
 U 1 1 625B8421
 P 4650 3100
@@ -152,8 +141,8 @@ $Comp
 L Connector:Screw_Terminal_01x09 J?
 U 1 1 625D8F0E
 P 7150 4350
-F 0 "J?" H 7068 3725 50  0000 C CNN
-F 1 "Screw_Terminal_01x09" H 7600 3800 50  0000 C CNN
+F 0 "J?" H 7650 4200 50  0000 C CNN
+F 1 "Screw_Terminal_01x09" H 7750 4350 50  0000 C CNN
 F 2 "" H 7150 4350 50  0001 C CNN
 F 3 "~" H 7150 4350 50  0001 C CNN
 	1    7150 4350
@@ -539,8 +528,8 @@ Text Label 5800 4550 2    50   ~ 0
 D2
 Text Label 5800 4650 2    50   ~ 0
 D1
-Text Notes 5350 5150 0    50   ~ 0
-D4 is on-board LED for NodeMCU V3
+Text Notes 5300 5350 0    50   ~ 0
+D3 is GPIO0 (used for programming)\nD4 is on-board LED for NodeMCU V3\nRST already has reset button on-board
 $Bitmap
 Pos 2000 1700
 Scale 1.000000
@@ -11085,4 +11074,15 @@ Text Label 5800 4450 2    50   ~ 0
 GPIO0
 Wire Wire Line
 	5800 4450 5850 4450
+$Comp
+L project:NodeMCUv3 U?
+U 1 1 6299BF2F
+P 5850 3350
+F 0 "U?" H 6200 3575 50  0000 C CNN
+F 1 "NodeMCUv3" H 6200 3484 50  0000 C CNN
+F 2 "project:lolinv3" H 6250 3450 50  0001 C CNN
+F 3 "${KIPRJMOD}/../docs/NodeMCU-V3.pdf" H 6250 3450 50  0001 C CNN
+	1    5850 3350
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
