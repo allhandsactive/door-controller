@@ -20,7 +20,7 @@ P 5850 3350
 F 0 "U?" H 6200 3575 50  0000 C CNN
 F 1 "lolinv3" H 6200 3484 50  0000 C CNN
 F 2 "project:lolinv3" H 6250 3450 50  0001 C CNN
-F 3 "" H 6250 3450 50  0001 C CNN
+F 3 "${KIPRJMOD}/../docs/NodeMCU-V3.pdf" H 6250 3450 50  0001 C CNN
 	1    5850 3350
 	1    0    0    -1  
 $EndComp
@@ -245,7 +245,7 @@ $EndComp
 Wire Wire Line
 	2500 6100 2550 6100
 Text Notes 4550 1950 0    50   ~ 0
-TODO: zener diode/rpp on 3v3\nTODO: UART connector\nTODO: figure out EN pin\nTODO: link data sheet\nTODO: GPIO0 programming switch
+TODO: zener diode/rpp on 3v3\nTODO: UART connector\nTODO: figure out EN pin\nTODO: link data sheet\nTODO: GPIO0 programming switch\nTODO: LED for prog mode
 $Comp
 L Connector:Screw_Terminal_01x02 J?
 U 1 1 627917BC
