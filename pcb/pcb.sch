@@ -14,66 +14,6 @@ Comment3 ""
 Comment4 "Marion Anderson"
 $EndDescr
 $Comp
-L Connector:Conn_01x04_Male J?
-U 1 1 625B8421
-P 9300 6000
-F 0 "J?" H 9408 6281 50  0000 C CNN
-F 1 "JST XH-4P" H 9408 6190 50  0000 C CNN
-F 2 "" H 9300 6000 50  0001 C CNN
-F 3 "https://www.amazon.com/GeeBat-460pcs-Connector-Housing-Adapter/dp/B01MCZE2HM/" H 9300 6000 50  0001 C CNN
-	1    9300 6000
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	9050 1600 9000 1600
-Wire Wire Line
-	9050 1600 9050 1700
-Wire Wire Line
-	9050 1900 9000 1900
-Wire Wire Line
-	9000 1800 9050 1800
-Connection ~ 9050 1800
-Wire Wire Line
-	9050 1800 9050 1900
-Wire Wire Line
-	9000 1700 9050 1700
-Connection ~ 9050 1700
-$Comp
-L Connector:Screw_Terminal_01x04 J?
-U 1 1 6271B9E3
-P 8800 1800
-F 0 "J?" H 8800 1400 50  0000 C CNN
-F 1 "Screw_Terminal_01x04" H 8800 1500 50  0001 C CNN
-F 2 "" H 8800 1800 50  0001 C CNN
-F 3 "~" H 8800 1800 50  0001 C CNN
-	1    8800 1800
-	-1   0    0    1   
-$EndComp
-$Comp
-L power:VBUS #PWR?
-U 1 1 62722E8F
-P 9050 1550
-F 0 "#PWR?" H 9050 1400 50  0001 C CNN
-F 1 "VBUS" H 9065 1723 50  0000 C CNN
-F 2 "" H 9050 1550 50  0001 C CNN
-F 3 "" H 9050 1550 50  0001 C CNN
-	1    9050 1550
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 6273AC33
-P 8550 5050
-F 0 "#PWR?" H 8550 4800 50  0001 C CNN
-F 1 "GND" H 8555 4877 50  0000 C CNN
-F 2 "" H 8550 5050 50  0001 C CNN
-F 3 "" H 8550 5050 50  0001 C CNN
-	1    8550 5050
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8450 4800 8500 4800
-$Comp
 L Connector:Screw_Terminal_01x02 J?
 U 1 1 627917BC
 P 8150 3000
@@ -99,50 +39,6 @@ F 3 "" H 7900 3300 50  0001 C CNN
 	1    7900 3300
 	1    0    0    -1  
 $EndComp
-Text Label 9000 4700 0    50   ~ 0
-UNLOCK_PIN
-Wire Wire Line
-	8450 4700 8600 4700
-Wire Wire Line
-	8550 5000 8550 5050
-Wire Wire Line
-	8550 5000 8600 5000
-Wire Wire Line
-	8600 5000 8600 4950
-Wire Wire Line
-	8550 5000 8500 5000
-Connection ~ 8550 5000
-Wire Wire Line
-	8600 4750 8600 4700
-Connection ~ 8600 4700
-Wire Wire Line
-	8600 4700 9000 4700
-$Comp
-L power:VBUS #PWR?
-U 1 1 628270DA
-P 8600 4600
-F 0 "#PWR?" H 8600 4450 50  0001 C CNN
-F 1 "VBUS" V 8615 4728 50  0000 L CNN
-F 2 "" H 8600 4600 50  0001 C CNN
-F 3 "" H 8600 4600 50  0001 C CNN
-	1    8600 4600
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	8600 4600 8450 4600
-$Comp
-L Device:D_Zener_Small D?
-U 1 1 628549E6
-P 8600 4850
-F 0 "D?" V 8554 4918 50  0000 L CNN
-F 1 "Vz=3v3" V 8645 4918 50  0000 L CNN
-F 2 "" V 8600 4850 50  0001 C CNN
-F 3 "~" V 8600 4850 50  0001 C CNN
-	1    8600 4850
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	8500 5000 8500 4800
 Wire Wire Line
 	7150 3250 7150 3300
 $Comp
@@ -180,42 +76,6 @@ F 3 "" H 7150 3300 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	7900 3100 7900 3300
-$Comp
-L power:+3V3 #PWR?
-U 1 1 6290E962
-P 9550 5900
-F 0 "#PWR?" H 9550 5750 50  0001 C CNN
-F 1 "+3V3" V 9565 6028 50  0000 L CNN
-F 2 "" H 9550 5900 50  0001 C CNN
-F 3 "" H 9550 5900 50  0001 C CNN
-	1    9550 5900
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 6290F066
-P 9550 6000
-F 0 "#PWR?" H 9550 5750 50  0001 C CNN
-F 1 "GND" V 9555 5872 50  0000 R CNN
-F 2 "" H 9550 6000 50  0001 C CNN
-F 3 "" H 9550 6000 50  0001 C CNN
-	1    9550 6000
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	9550 5900 9500 5900
-Wire Wire Line
-	9550 6000 9500 6000
-Text Notes 600  5200 0    50   ~ 0
-Pins to Not Expose\n-------------------------\n- D3 is GPIO0 (used for programming)\n- D4 is on-board LED for NodeMCU (already used)\n- RST connected to on-NodeMCU reset button (no need)\n- EN likely unused; connect to pin header just in case (special pin)\n- 10 (3V3) boxed in by D1,D2,D3 traces (no point)
-Text Label 9600 6200 0    50   ~ 0
-RXD
-Text Label 9600 6100 0    50   ~ 0
-TXD
-Wire Wire Line
-	9600 6100 9500 6100
-Wire Wire Line
-	9600 6200 9500 6200
 Text Notes 6350 750  0    118  ~ 24
 Power Connectors
 Text Notes 600  3800 0    50   ~ 0
@@ -223,143 +83,143 @@ Goal: Provide cleaner package for door controller than\ncurrently existing bread
 $Comp
 L Device:R_Small R?
 U 1 1 62B8AC02
-P 7350 5550
-F 0 "R?" H 7300 5550 50  0000 R CNN
-F 1 "1k" V 7350 5600 50  0000 R CNN
-F 2 "" H 7350 5550 50  0001 C CNN
-F 3 "~" H 7350 5550 50  0001 C CNN
-	1    7350 5550
+P 6800 6050
+F 0 "R?" H 6750 6050 50  0000 R CNN
+F 1 "1k" V 6800 6100 50  0000 R CNN
+F 2 "" H 6800 6050 50  0001 C CNN
+F 3 "~" H 6800 6050 50  0001 C CNN
+	1    6800 6050
 	-1   0    0    1   
 $EndComp
 $Comp
 L Device:LED_Small D?
 U 1 1 62B8B2A2
-P 7350 5800
-F 0 "D?" V 7396 5732 50  0000 R CNN
-F 1 "GN" V 7305 5732 50  0000 R CNN
-F 2 "" V 7350 5800 50  0001 C CNN
-F 3 "~" V 7350 5800 50  0001 C CNN
-	1    7350 5800
+P 6800 6300
+F 0 "D?" V 6846 6232 50  0000 R CNN
+F 1 "GN" V 6755 6232 50  0000 R CNN
+F 2 "" V 6800 6300 50  0001 C CNN
+F 3 "~" V 6800 6300 50  0001 C CNN
+	1    6800 6300
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	7350 5650 7350 5700
+	6800 6150 6800 6200
 $Comp
 L power:GND #PWR?
 U 1 1 62B93838
-P 7350 5950
-F 0 "#PWR?" H 7350 5700 50  0001 C CNN
-F 1 "GND" H 7355 5777 50  0000 C CNN
-F 2 "" H 7350 5950 50  0001 C CNN
-F 3 "" H 7350 5950 50  0001 C CNN
-	1    7350 5950
+P 6800 6450
+F 0 "#PWR?" H 6800 6200 50  0001 C CNN
+F 1 "GND" H 6805 6277 50  0000 C CNN
+F 2 "" H 6800 6450 50  0001 C CNN
+F 3 "" H 6800 6450 50  0001 C CNN
+	1    6800 6450
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7350 5950 7350 5900
+	6800 6450 6800 6400
 $Comp
 L power:+3V3 #PWR?
 U 1 1 62B999E8
-P 7350 5400
-F 0 "#PWR?" H 7350 5250 50  0001 C CNN
-F 1 "+3V3" H 7365 5573 50  0000 C CNN
-F 2 "" H 7350 5400 50  0001 C CNN
-F 3 "" H 7350 5400 50  0001 C CNN
-	1    7350 5400
+P 6800 5900
+F 0 "#PWR?" H 6800 5750 50  0001 C CNN
+F 1 "+3V3" H 6815 6073 50  0000 C CNN
+F 2 "" H 6800 5900 50  0001 C CNN
+F 3 "" H 6800 5900 50  0001 C CNN
+	1    6800 5900
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7350 5400 7350 5450
+	6800 5900 6800 5950
 $Comp
 L Device:R_Small R?
 U 1 1 62B9F8EE
-P 7050 5550
-F 0 "R?" H 7000 5550 50  0000 R CNN
-F 1 "1k" V 7050 5600 50  0000 R CNN
-F 2 "" H 7050 5550 50  0001 C CNN
-F 3 "~" H 7050 5550 50  0001 C CNN
-	1    7050 5550
+P 6500 6050
+F 0 "R?" H 6450 6050 50  0000 R CNN
+F 1 "1k" V 6500 6100 50  0000 R CNN
+F 2 "" H 6500 6050 50  0001 C CNN
+F 3 "~" H 6500 6050 50  0001 C CNN
+	1    6500 6050
 	-1   0    0    1   
 $EndComp
 $Comp
 L Device:LED_Small D?
 U 1 1 62B9F8F4
-P 7050 5800
-F 0 "D?" V 7096 5732 50  0000 R CNN
-F 1 "GN" V 7005 5732 50  0000 R CNN
-F 2 "" V 7050 5800 50  0001 C CNN
-F 3 "~" V 7050 5800 50  0001 C CNN
-	1    7050 5800
+P 6500 6300
+F 0 "D?" V 6546 6232 50  0000 R CNN
+F 1 "GN" V 6455 6232 50  0000 R CNN
+F 2 "" V 6500 6300 50  0001 C CNN
+F 3 "~" V 6500 6300 50  0001 C CNN
+	1    6500 6300
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	7050 5650 7050 5700
+	6500 6150 6500 6200
 $Comp
 L power:GND #PWR?
 U 1 1 62B9F8FB
-P 7050 5950
-F 0 "#PWR?" H 7050 5700 50  0001 C CNN
-F 1 "GND" H 7055 5777 50  0000 C CNN
-F 2 "" H 7050 5950 50  0001 C CNN
-F 3 "" H 7050 5950 50  0001 C CNN
-	1    7050 5950
+P 6500 6450
+F 0 "#PWR?" H 6500 6200 50  0001 C CNN
+F 1 "GND" H 6505 6277 50  0000 C CNN
+F 2 "" H 6500 6450 50  0001 C CNN
+F 3 "" H 6500 6450 50  0001 C CNN
+	1    6500 6450
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7050 5950 7050 5900
+	6500 6450 6500 6400
 Wire Wire Line
-	7050 5400 7050 5450
+	6500 5900 6500 5950
 $Comp
 L power:VBUS #PWR?
 U 1 1 62BAAEB2
-P 7050 5400
-F 0 "#PWR?" H 7050 5250 50  0001 C CNN
-F 1 "VBUS" H 7065 5573 50  0000 C CNN
-F 2 "" H 7050 5400 50  0001 C CNN
-F 3 "" H 7050 5400 50  0001 C CNN
-	1    7050 5400
+P 6500 5900
+F 0 "#PWR?" H 6500 5750 50  0001 C CNN
+F 1 "VBUS" H 6515 6073 50  0000 C CNN
+F 2 "" H 6500 5900 50  0001 C CNN
+F 3 "" H 6500 5900 50  0001 C CNN
+	1    6500 5900
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R_Small R?
 U 1 1 62BD1210
-P 7650 5550
-F 0 "R?" H 7600 5550 50  0000 R CNN
-F 1 "1k" V 7650 5600 50  0000 R CNN
-F 2 "" H 7650 5550 50  0001 C CNN
-F 3 "~" H 7650 5550 50  0001 C CNN
-	1    7650 5550
+P 7100 6050
+F 0 "R?" H 7050 6050 50  0000 R CNN
+F 1 "1k" V 7100 6100 50  0000 R CNN
+F 2 "" H 7100 6050 50  0001 C CNN
+F 3 "~" H 7100 6050 50  0001 C CNN
+	1    7100 6050
 	-1   0    0    1   
 $EndComp
 $Comp
 L Device:LED_Small D?
 U 1 1 62BD1216
-P 7650 5800
-F 0 "D?" V 7696 5732 50  0000 R CNN
-F 1 "RD" V 7605 5732 50  0000 R CNN
-F 2 "" V 7650 5800 50  0001 C CNN
-F 3 "~" V 7650 5800 50  0001 C CNN
-	1    7650 5800
+P 7100 6300
+F 0 "D?" V 7146 6232 50  0000 R CNN
+F 1 "RD" V 7055 6232 50  0000 R CNN
+F 2 "" V 7100 6300 50  0001 C CNN
+F 3 "~" V 7100 6300 50  0001 C CNN
+	1    7100 6300
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	7650 5650 7650 5700
+	7100 6150 7100 6200
 Wire Wire Line
-	7650 5950 7650 5900
+	7100 6450 7100 6400
 $Comp
 L power:+3V3 #PWR?
 U 1 1 62BD1224
-P 7650 5400
-F 0 "#PWR?" H 7650 5250 50  0001 C CNN
-F 1 "+3V3" H 7665 5573 50  0000 C CNN
-F 2 "" H 7650 5400 50  0001 C CNN
-F 3 "" H 7650 5400 50  0001 C CNN
-	1    7650 5400
+P 7100 5900
+F 0 "#PWR?" H 7100 5750 50  0001 C CNN
+F 1 "+3V3" H 7115 6073 50  0000 C CNN
+F 2 "" H 7100 5900 50  0001 C CNN
+F 3 "" H 7100 5900 50  0001 C CNN
+	1    7100 5900
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7650 5400 7650 5450
-Text Label 7650 5950 3    50   ~ 0
+	7100 5900 7100 5950
+Text Label 7100 6450 3    50   ~ 0
 GPIO_0
 Wire Wire Line
 	7500 3000 7700 3000
@@ -381,105 +241,8 @@ Wire Wire Line
 Connection ~ 7150 3000
 Wire Wire Line
 	7150 3000 7150 3050
-Text Notes 6350 1550 0    50   ~ 10
+Text Notes 6400 1550 0    50   ~ 10
 Power Input (5-15V)
-Text Notes 6350 2550 0    50   ~ 0
-- over current protection using fuse\n- over voltage protection using zener diode\n- reverse polarity protection using 1n4148\n- use blade fuses + fuse holder for easy replacement\n- fuse before zener diode\n  - zener diode shorts (kinda) on V>15\n  - fuse (hopefully) blows on current surge\n- 15V is max allowed Vin\n  - NodeMCU V3 likely uses AMS1117 lin reg\n  - max Vin of 15V\n  - very common regulator\n  - https://nettigo.eu/system/images/3280/original.jpg?1552419634
-Wire Wire Line
-	9050 1550 9050 1600
-Connection ~ 9050 1600
-Wire Wire Line
-	9050 1700 9050 1800
-Wire Wire Line
-	9600 1600 9550 1600
-Wire Wire Line
-	9600 1600 9600 1700
-Wire Wire Line
-	9600 1900 9550 1900
-Wire Wire Line
-	9550 1800 9600 1800
-Connection ~ 9600 1800
-Wire Wire Line
-	9600 1800 9600 1900
-Wire Wire Line
-	9550 1700 9600 1700
-Connection ~ 9600 1700
-$Comp
-L Connector:Screw_Terminal_01x04 J?
-U 1 1 62C4A36C
-P 9350 1800
-F 0 "J?" H 9350 1400 50  0000 C CNN
-F 1 "Screw_Terminal_01x04" H 9350 1500 50  0001 C CNN
-F 2 "" H 9350 1800 50  0001 C CNN
-F 3 "~" H 9350 1800 50  0001 C CNN
-	1    9350 1800
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	9600 1700 9600 1800
-$Comp
-L power:GND #PWR?
-U 1 1 62C4D5D6
-P 9600 1950
-F 0 "#PWR?" H 9600 1700 50  0001 C CNN
-F 1 "GND" H 9605 1777 50  0000 C CNN
-F 2 "" H 9600 1950 50  0001 C CNN
-F 3 "" H 9600 1950 50  0001 C CNN
-	1    9600 1950
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	9600 1950 9600 1900
-Connection ~ 9600 1900
-Wire Wire Line
-	10100 1600 10050 1600
-Wire Wire Line
-	10100 1600 10100 1700
-Wire Wire Line
-	10100 1900 10050 1900
-Wire Wire Line
-	10050 1800 10100 1800
-Connection ~ 10100 1800
-Wire Wire Line
-	10100 1800 10100 1900
-Wire Wire Line
-	10050 1700 10100 1700
-Connection ~ 10100 1700
-$Comp
-L Connector:Screw_Terminal_01x04 J?
-U 1 1 62C5D4F7
-P 9850 1800
-F 0 "J?" H 9850 1400 50  0000 C CNN
-F 1 "Screw_Terminal_01x04" H 9850 1500 50  0001 C CNN
-F 2 "" H 9850 1800 50  0001 C CNN
-F 3 "~" H 9850 1800 50  0001 C CNN
-	1    9850 1800
-	-1   0    0    1   
-$EndComp
-Connection ~ 10100 1600
-Wire Wire Line
-	10100 1700 10100 1800
-Wire Wire Line
-	10100 1250 10100 1300
-Wire Wire Line
-	10100 1500 10100 1600
-Text Notes 8600 900  0    50   ~ 10
-Power Outputs
-Text Notes 8600 1100 0    50   ~ 0
-- 3V3 needs reverse polarity\n- VBUS already has protections
-$Comp
-L power:+3V3 #PWR?
-U 1 1 62CF3EB2
-P 10100 1250
-F 0 "#PWR?" H 10100 1100 50  0001 C CNN
-F 1 "+3V3" H 10115 1423 50  0000 C CNN
-F 2 "" H 10100 1250 50  0001 C CNN
-F 3 "" H 10100 1250 50  0001 C CNN
-	1    10100 1250
-	1    0    0    -1  
-$EndComp
-Wire Notes Line width 20
-	-4350 2150 -4350 9350
 Text Notes 550  750  0    118  ~ 24
 Overview
 Text Notes 550  4500 0    118  ~ 24
@@ -491,7 +254,7 @@ Wire Notes Line width 20
 Wire Notes Line width 20
 	6250 4250 500  4250
 $Bitmap
-Pos 4550 6450
+Pos 4800 5500
 Scale 1.000000
 Data
 89 50 4E 47 0D 0A 1A 0A 00 00 00 0D 49 48 44 52 00 00 03 6B 00 00 02 B0 08 02 00 00 00 89 59 70 
@@ -11011,205 +10774,188 @@ AA 6D 9A 2F 90 9A 67 9E 79 E6 99 E7 8D E0 2D 71 92 9B 67 9E DF 5E DE B2 B2 7A 9E
 EndData
 $EndBitmap
 Wire Wire Line
-	2250 7250 2350 7250
+	2550 7650 2650 7650
 Wire Wire Line
-	1500 7150 1550 7150
-Text Label 1500 7150 2    50   ~ 0
+	1800 7550 1850 7550
+Text Label 1800 7550 2    50   ~ 0
 UNLOCK_PIN
 $Comp
 L power:VBUS #PWR?
 U 1 1 627D4DE7
-P 2300 5850
-F 0 "#PWR?" H 2300 5700 50  0001 C CNN
-F 1 "VBUS" V 2315 5978 50  0000 L CNN
-F 2 "" H 2300 5850 50  0001 C CNN
-F 3 "" H 2300 5850 50  0001 C CNN
-	1    2300 5850
+P 2600 6250
+F 0 "#PWR?" H 2600 6100 50  0001 C CNN
+F 1 "VBUS" V 2615 6378 50  0000 L CNN
+F 2 "" H 2600 6250 50  0001 C CNN
+F 3 "" H 2600 6250 50  0001 C CNN
+	1    2600 6250
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	2300 5850 2250 5850
+	2600 6250 2550 6250
 $Comp
 L power:GND #PWR?
 U 1 1 6289091D
-P 2300 5950
-F 0 "#PWR?" H 2300 5700 50  0001 C CNN
-F 1 "GND" V 2305 5822 50  0000 R CNN
-F 2 "" H 2300 5950 50  0001 C CNN
-F 3 "" H 2300 5950 50  0001 C CNN
-	1    2300 5950
+P 2600 6350
+F 0 "#PWR?" H 2600 6100 50  0001 C CNN
+F 1 "GND" V 2605 6222 50  0000 R CNN
+F 2 "" H 2600 6350 50  0001 C CNN
+F 3 "" H 2600 6350 50  0001 C CNN
+	1    2600 6350
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	2300 5950 2250 5950
+	2600 6350 2550 6350
 $Comp
 L power:+3V3 #PWR?
 U 1 1 6289B298
-P 1500 5850
-F 0 "#PWR?" H 1500 5700 50  0001 C CNN
-F 1 "+3V3" V 1515 5978 50  0000 L CNN
-F 2 "" H 1500 5850 50  0001 C CNN
-F 3 "" H 1500 5850 50  0001 C CNN
-	1    1500 5850
+P 1800 6250
+F 0 "#PWR?" H 1800 6100 50  0001 C CNN
+F 1 "+3V3" V 1815 6378 50  0000 L CNN
+F 2 "" H 1800 6250 50  0001 C CNN
+F 3 "" H 1800 6250 50  0001 C CNN
+	1    1800 6250
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	1500 5850 1550 5850
+	1800 6250 1850 6250
 $Comp
 L power:GND #PWR?
 U 1 1 6289D808
-P 1500 5950
-F 0 "#PWR?" H 1500 5700 50  0001 C CNN
-F 1 "GND" V 1505 5822 50  0000 R CNN
-F 2 "" H 1500 5950 50  0001 C CNN
-F 3 "" H 1500 5950 50  0001 C CNN
-	1    1500 5950
+P 1800 6350
+F 0 "#PWR?" H 1800 6100 50  0001 C CNN
+F 1 "GND" V 1805 6222 50  0000 R CNN
+F 2 "" H 1800 6350 50  0001 C CNN
+F 3 "" H 1800 6350 50  0001 C CNN
+	1    1800 6350
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	1500 5950 1550 5950
+	1800 6350 1850 6350
 $Comp
 L power:GND #PWR?
 U 1 1 628A269C
-P 1500 6650
-F 0 "#PWR?" H 1500 6400 50  0001 C CNN
-F 1 "GND" V 1505 6522 50  0000 R CNN
-F 2 "" H 1500 6650 50  0001 C CNN
-F 3 "" H 1500 6650 50  0001 C CNN
-	1    1500 6650
+P 1800 7050
+F 0 "#PWR?" H 1800 6800 50  0001 C CNN
+F 1 "GND" V 1805 6922 50  0000 R CNN
+F 2 "" H 1800 7050 50  0001 C CNN
+F 3 "" H 1800 7050 50  0001 C CNN
+	1    1800 7050
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	1500 6650 1550 6650
+	1800 7050 1850 7050
 $Comp
 L power:GND #PWR?
 U 1 1 628A8319
-P 2300 6350
-F 0 "#PWR?" H 2300 6100 50  0001 C CNN
-F 1 "GND" V 2305 6222 50  0000 R CNN
-F 2 "" H 2300 6350 50  0001 C CNN
-F 3 "" H 2300 6350 50  0001 C CNN
-	1    2300 6350
+P 2600 6750
+F 0 "#PWR?" H 2600 6500 50  0001 C CNN
+F 1 "GND" V 2605 6622 50  0000 R CNN
+F 2 "" H 2600 6750 50  0001 C CNN
+F 3 "" H 2600 6750 50  0001 C CNN
+	1    2600 6750
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	2300 6350 2250 6350
+	2600 6750 2550 6750
 $Comp
 L power:+3V3 #PWR?
 U 1 1 628AA533
-P 2300 6250
-F 0 "#PWR?" H 2300 6100 50  0001 C CNN
-F 1 "+3V3" V 2315 6378 50  0000 L CNN
-F 2 "" H 2300 6250 50  0001 C CNN
-F 3 "" H 2300 6250 50  0001 C CNN
-	1    2300 6250
+P 2600 6650
+F 0 "#PWR?" H 2600 6500 50  0001 C CNN
+F 1 "+3V3" V 2615 6778 50  0000 L CNN
+F 2 "" H 2600 6650 50  0001 C CNN
+F 3 "" H 2600 6650 50  0001 C CNN
+	1    2600 6650
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	2300 6250 2250 6250
-NoConn ~ 2250 6050
-Text Label 1450 6050 2    50   ~ 0
+	2600 6650 2550 6650
+NoConn ~ 2550 6450
+Text Label 1750 6450 2    50   ~ 0
 TXD
-Text Label 1450 6150 2    50   ~ 0
+Text Label 1750 6550 2    50   ~ 0
 RXD
 Wire Wire Line
-	1450 6050 1550 6050
+	1750 6450 1850 6450
 Wire Wire Line
-	1450 6150 1550 6150
-NoConn ~ 1550 6850
-Text Label 1500 6950 2    50   ~ 0
+	1750 6550 1850 6550
+Text Label 1800 7350 2    50   ~ 0
 GPIO_0
 Wire Wire Line
-	1500 6950 1550 6950
+	1800 7350 1850 7350
 $Comp
 L Connector:Conn_01x01_Male J?
 U 1 1 629AF30A
-P 2550 6150
-F 0 "J?" H 2522 6082 50  0000 R CNN
-F 1 "pin header" H 2522 6173 50  0000 R CNN
-F 2 "" H 2550 6150 50  0001 C CNN
-F 3 "~" H 2550 6150 50  0001 C CNN
-	1    2550 6150
+P 2850 6550
+F 0 "J?" H 2822 6482 50  0000 R CNN
+F 1 "pin header" H 2822 6573 50  0000 R CNN
+F 2 "" H 2850 6550 50  0001 C CNN
+F 3 "~" H 2850 6550 50  0001 C CNN
+	1    2850 6550
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	2350 6150 2250 6150
-NoConn ~ 1550 6750
+	2650 6550 2550 6550
+NoConn ~ 1850 7150
 Wire Wire Line
-	2350 7050 2350 7250
+	2650 7450 2650 7650
 Wire Wire Line
-	2250 6450 2550 6450
+	2550 6850 2850 6850
 Wire Wire Line
-	2250 6550 2550 6550
+	2550 6950 2850 6950
 Wire Wire Line
-	2250 6650 2550 6650
+	2550 7050 2850 7050
 Wire Wire Line
-	2250 6750 2550 6750
+	2550 7150 2850 7150
 Wire Wire Line
-	2250 6850 2550 6850
+	2550 7250 2850 7250
 Wire Wire Line
-	2250 6950 2550 6950
+	2550 7350 2850 7350
 Wire Wire Line
-	2350 7050 2550 7050
+	2650 7450 2850 7450
 $Comp
 L project:NodeMCUv3 U?
 U 1 1 6299BF2F
-P 1550 5850
-F 0 "U?" H 1900 6075 50  0000 C CNN
-F 1 "NodeMCUv3" H 1900 5984 50  0000 C CNN
-F 2 "project:lolinv3" H 1950 5950 50  0001 C CNN
-F 3 "${KIPRJMOD}/../docs/NodeMCU-V3.pdf" H 1950 5950 50  0001 C CNN
-	1    1550 5850
+P 1850 6250
+F 0 "U?" H 2200 6475 50  0000 C CNN
+F 1 "NodeMCUv3" H 2200 6384 50  0000 C CNN
+F 2 "project:lolinv3" H 2250 6350 50  0001 C CNN
+F 3 "${KIPRJMOD}/../docs/NodeMCU-V3.pdf" H 2250 6350 50  0001 C CNN
+	1    1850 6250
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1200 6650 1200 7050
-Wire Wire Line
-	1200 7050 1550 7050
-Wire Wire Line
-	1000 6750 950  6750
+	1150 7150 1100 7150
 $Comp
 L Connector:Screw_Terminal_01x06 J?
 U 1 1 62A0C44B
-P 750 6550
-F 0 "J?" H 900 6400 50  0000 C CNN
-F 1 "Screw_Terminal_01x06" H 1050 6500 50  0001 C CNN
-F 2 "" H 750 6550 50  0001 C CNN
-F 3 "~" H 750 6550 50  0001 C CNN
-	1    750  6550
+P 900 6950
+F 0 "J?" H 1050 6800 50  0000 C CNN
+F 1 "Screw_Terminal_01x06" H 1200 6900 50  0001 C CNN
+F 2 "" H 900 6950 50  0001 C CNN
+F 3 "~" H 900 6950 50  0001 C CNN
+	1    900  6950
 	-1   0    0    1   
 $EndComp
 $Comp
 L Connector:Screw_Terminal_01x07 J?
 U 1 1 62AD8C42
-P 2750 6750
-F 0 "J?" H 2830 6746 50  0000 L CNN
-F 1 "Screw_Terminal_01x07" H 2830 6701 50  0001 L CNN
-F 2 "" H 2750 6750 50  0001 C CNN
-F 3 "~" H 2750 6750 50  0001 C CNN
-	1    2750 6750
+P 3050 7150
+F 0 "J?" H 3130 7146 50  0000 L CNN
+F 1 "Screw_Terminal_01x07" H 3130 7101 50  0001 L CNN
+F 2 "" H 3050 7150 50  0001 C CNN
+F 3 "~" H 3050 7150 50  0001 C CNN
+	1    3050 7150
 	1    0    0    -1  
 $EndComp
 Wire Notes Line width 20
 	6300 6750 6300 550 
 Text Notes 3250 2700 0    50   ~ 0
 \n\n\n\nFIRST USAGE\n-------------------------\n1.  Connect NFC comms wires to 4-pin molex connector\n2.  Connect relay pwr, gnd, sig to relay screw terminal\n3.  Check that a fuse is in the fuse holder (FH1)\n4.  Connect 12VDC power brick to "Power In" connector\n5.  Verify "VBUS" LED is lit. Relay may also click/LEDs\n6.  Remove blade fuse (LEDs should go dim)\n7.  Program NodeMCU V3 with firmware in this repo\n8.  Seat NodeMCU V3 onto board (!!CHECK ORIENTATION!!)\n9.  Re-place blade fuse (VBUS, 3V3 LEDs should light up)\n10. LEDs should light up and door-controller should be functional
-Text Notes 6400 4200 0    50   ~ 0
-TODO\n- worth switching unlock to 3-pin keyed JST\n- dig up jst xh-4p for NFC
 Wire Wire Line
-	1000 7250 1550 7250
+	1150 7150 1150 7650
 Wire Wire Line
-	1000 6750 1000 7250
-Wire Wire Line
-	950  6650 1200 6650
-Wire Wire Line
-	950  6550 1550 6550
-Wire Wire Line
-	950  6450 1550 6450
-Wire Wire Line
-	950  6350 1550 6350
-Wire Wire Line
-	950  6250 1550 6250
+	1100 7050 1300 7050
 $Comp
 L Device:D_Small D?
 U 1 1 6277C4DF
@@ -11221,17 +10967,30 @@ F 3 "http://www.vishay.com/docs/88503/1n4001.pdf" H 7400 3000 50  0001 C CNN
 	1    7400 3000
 	1    0    0    -1  
 $EndComp
-$Comp
-L Connector:Conn_01x03_Male J?
-U 1 1 627915A3
-P 8250 4700
-F 0 "J?" H 8358 4981 50  0000 C CNN
-F 1 "JST XH-3P" H 8358 4890 50  0000 C CNN
-F 2 "" H 8250 4700 50  0001 C CNN
-F 3 "https://www.amazon.com/GeeBat-460pcs-Connector-Housing-Adapter/dp/B01MCZE2HM/" H 8250 4700 50  0001 C CNN
-	1    8250 4700
-	1    0    0    -1  
-$EndComp
+Text Label 1800 7250 2    50   ~ 0
+UNLOCK_LED
+Wire Wire Line
+	1800 7250 1850 7250
+Wire Wire Line
+	1300 7450 1300 7050
+Wire Wire Line
+	1300 7450 1850 7450
+Wire Wire Line
+	1150 7650 1850 7650
+Text Notes 600  5700 0    50   ~ 0
+Pins to Not Expose\n-------------------------\n- D3 is GPIO0 (used for programming)\n- RST connected to on-NodeMCU reset button (no need)\n- EN likely unused; connect to pin header just in case (special pin)\n- 10 (3V3) boxed in by D1,D2,D3 traces (no point)\n\nPinout\n-------------------------\n- D1 drives unlock relay\n- D4 is on-NodeMCU LED, double as external LED\n\nscrew terminal pins low short risk compared\nto dedicated connections. no need for voltage protections
+Wire Wire Line
+	1100 6650 1850 6650
+Wire Wire Line
+	1100 6750 1850 6750
+Wire Wire Line
+	1100 6850 1850 6850
+Wire Wire Line
+	1100 6950 1850 6950
+Text Notes 3450 7200 0    50   ~ 10
+layout: all pins must be clearly labelled\non silkscreen
+Text Notes 6400 4200 0    50   ~ 10
+layout: all pins and indicators must be\nclearly labelled on silkscreen
 $Comp
 L Device:D_Small D?
 U 1 1 627A484D
@@ -11243,4 +11002,309 @@ F 3 "http://www.vishay.com/docs/88503/1n4001.pdf" H 10100 1400 50  0001 C CNN
 	1    10100 1400
 	0    -1   -1   0   
 $EndComp
+$Comp
+L power:+3V3 #PWR?
+U 1 1 62CF3EB2
+P 10100 1250
+F 0 "#PWR?" H 10100 1100 50  0001 C CNN
+F 1 "+3V3" H 10115 1423 50  0000 C CNN
+F 2 "" H 10100 1250 50  0001 C CNN
+F 3 "" H 10100 1250 50  0001 C CNN
+	1    10100 1250
+	1    0    0    -1  
+$EndComp
+Text Notes 8600 1100 0    50   ~ 0
+- 3V3 needs reverse polarity\n- VBUS already has protections
+Text Notes 8600 900  0    50   ~ 10
+Power Outputs
+Wire Wire Line
+	10100 1500 10100 1600
+Wire Wire Line
+	10100 1250 10100 1300
+Wire Wire Line
+	10100 1700 10100 1800
+Connection ~ 10100 1600
+$Comp
+L Connector:Screw_Terminal_01x04 J?
+U 1 1 62C5D4F7
+P 9850 1800
+F 0 "J?" H 9850 1400 50  0000 C CNN
+F 1 "Screw_Terminal_01x04" H 9850 1500 50  0001 C CNN
+F 2 "" H 9850 1800 50  0001 C CNN
+F 3 "~" H 9850 1800 50  0001 C CNN
+	1    9850 1800
+	-1   0    0    1   
+$EndComp
+Connection ~ 10100 1700
+Wire Wire Line
+	10050 1700 10100 1700
+Wire Wire Line
+	10100 1800 10100 1900
+Connection ~ 10100 1800
+Wire Wire Line
+	10050 1800 10100 1800
+Wire Wire Line
+	10100 1900 10050 1900
+Wire Wire Line
+	10100 1600 10100 1700
+Wire Wire Line
+	10100 1600 10050 1600
+Connection ~ 9600 1900
+Wire Wire Line
+	9600 1950 9600 1900
+$Comp
+L power:GND #PWR?
+U 1 1 62C4D5D6
+P 9600 1950
+F 0 "#PWR?" H 9600 1700 50  0001 C CNN
+F 1 "GND" H 9605 1777 50  0000 C CNN
+F 2 "" H 9600 1950 50  0001 C CNN
+F 3 "" H 9600 1950 50  0001 C CNN
+	1    9600 1950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9600 1700 9600 1800
+$Comp
+L Connector:Screw_Terminal_01x04 J?
+U 1 1 62C4A36C
+P 9350 1800
+F 0 "J?" H 9350 1400 50  0000 C CNN
+F 1 "Screw_Terminal_01x04" H 9350 1500 50  0001 C CNN
+F 2 "" H 9350 1800 50  0001 C CNN
+F 3 "~" H 9350 1800 50  0001 C CNN
+	1    9350 1800
+	-1   0    0    1   
+$EndComp
+Connection ~ 9600 1700
+Wire Wire Line
+	9550 1700 9600 1700
+Wire Wire Line
+	9600 1800 9600 1900
+Connection ~ 9600 1800
+Wire Wire Line
+	9550 1800 9600 1800
+Wire Wire Line
+	9600 1900 9550 1900
+Wire Wire Line
+	9600 1600 9600 1700
+Wire Wire Line
+	9600 1600 9550 1600
+Wire Wire Line
+	9050 1700 9050 1800
+Connection ~ 9050 1600
+Wire Wire Line
+	9050 1550 9050 1600
+Text Notes 6400 2550 0    50   ~ 0
+- over current protection using fuse\n- over voltage protection using zener diode\n- reverse polarity protection using 1n4148\n- use blade fuses + fuse holder for easy replacement\n- fuse before zener diode\n  - zener diode shorts (kinda) on V>15\n  - fuse (hopefully) blows on current surge\n- 15V is max allowed Vin\n  - NodeMCU V3 likely uses AMS1117 lin reg\n  - max Vin of 15V\n  - very common regulator\n  - https://nettigo.eu/system/images/3280/original.jpg?1552419634
+$Comp
+L power:VBUS #PWR?
+U 1 1 62722E8F
+P 9050 1550
+F 0 "#PWR?" H 9050 1400 50  0001 C CNN
+F 1 "VBUS" H 9065 1723 50  0000 C CNN
+F 2 "" H 9050 1550 50  0001 C CNN
+F 3 "" H 9050 1550 50  0001 C CNN
+	1    9050 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Screw_Terminal_01x04 J?
+U 1 1 6271B9E3
+P 8800 1800
+F 0 "J?" H 8800 1400 50  0000 C CNN
+F 1 "Screw_Terminal_01x04" H 8800 1500 50  0001 C CNN
+F 2 "" H 8800 1800 50  0001 C CNN
+F 3 "~" H 8800 1800 50  0001 C CNN
+	1    8800 1800
+	-1   0    0    1   
+$EndComp
+Connection ~ 9050 1700
+Wire Wire Line
+	9000 1700 9050 1700
+Wire Wire Line
+	9050 1800 9050 1900
+Connection ~ 9050 1800
+Wire Wire Line
+	9000 1800 9050 1800
+Wire Wire Line
+	9050 1900 9000 1900
+Wire Wire Line
+	9050 1600 9050 1700
+Wire Wire Line
+	9050 1600 9000 1600
+$Comp
+L power:GND #PWR?
+U 1 1 6273AC33
+P 9400 5700
+F 0 "#PWR?" H 9400 5450 50  0001 C CNN
+F 1 "GND" H 9405 5527 50  0000 C CNN
+F 2 "" H 9400 5700 50  0001 C CNN
+F 3 "" H 9400 5700 50  0001 C CNN
+	1    9400 5700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9300 5450 9350 5450
+Wire Wire Line
+	9300 5350 9450 5350
+Wire Wire Line
+	9400 5650 9400 5700
+Wire Wire Line
+	9400 5650 9450 5650
+Wire Wire Line
+	9450 5650 9450 5600
+Wire Wire Line
+	9400 5650 9350 5650
+Connection ~ 9400 5650
+Wire Wire Line
+	9450 5400 9450 5350
+Connection ~ 9450 5350
+Wire Wire Line
+	9450 5350 9850 5350
+$Comp
+L power:VBUS #PWR?
+U 1 1 628270DA
+P 9450 5250
+F 0 "#PWR?" H 9450 5100 50  0001 C CNN
+F 1 "VBUS" V 9465 5378 50  0000 L CNN
+F 2 "" H 9450 5250 50  0001 C CNN
+F 3 "" H 9450 5250 50  0001 C CNN
+	1    9450 5250
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	9450 5250 9300 5250
+$Comp
+L Device:D_Zener_Small D?
+U 1 1 628549E6
+P 9450 5500
+F 0 "D?" V 9404 5568 50  0000 L CNN
+F 1 "Vz=3v3" V 9495 5568 50  0000 L CNN
+F 2 "" V 9450 5500 50  0001 C CNN
+F 3 "~" V 9450 5500 50  0001 C CNN
+	1    9450 5500
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	9350 5650 9350 5450
+$Comp
+L Connector:Conn_01x03_Male J?
+U 1 1 627915A3
+P 9100 5350
+F 0 "J?" H 9208 5631 50  0000 C CNN
+F 1 "JST XH-3P" H 9208 5540 50  0000 C CNN
+F 2 "" H 9100 5350 50  0001 C CNN
+F 3 "https://www.amazon.com/GeeBat-460pcs-Connector-Housing-Adapter/dp/B01MCZE2HM/" H 9100 5350 50  0001 C CNN
+	1    9100 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x02_Male J?
+U 1 1 62791C9A
+P 9100 4400
+F 0 "J?" H 9200 4650 50  0000 C CNN
+F 1 "JST XH-2P" H 9200 4550 50  0000 C CNN
+F 2 "" H 9100 4400 50  0001 C CNN
+F 3 "https://www.amazon.com/GeeBat-460pcs-Connector-Housing-Adapter/dp/B01MCZE2HM/" H 9100 4400 50  0001 C CNN
+	1    9100 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 6279BED8
+P 9400 4750
+F 0 "#PWR?" H 9400 4500 50  0001 C CNN
+F 1 "GND" H 9405 4577 50  0000 C CNN
+F 2 "" H 9400 4750 50  0001 C CNN
+F 3 "" H 9400 4750 50  0001 C CNN
+	1    9400 4750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9300 4500 9350 4500
+Wire Wire Line
+	9400 4700 9400 4750
+Wire Wire Line
+	9400 4700 9450 4700
+Wire Wire Line
+	9450 4700 9450 4650
+Wire Wire Line
+	9400 4700 9350 4700
+Connection ~ 9400 4700
+$Comp
+L Device:D_Zener_Small D?
+U 1 1 6279BEE4
+P 9450 4550
+F 0 "D?" V 9404 4618 50  0000 L CNN
+F 1 "Vz=3v3" V 9495 4618 50  0000 L CNN
+F 2 "" V 9450 4550 50  0001 C CNN
+F 3 "~" V 9450 4550 50  0001 C CNN
+	1    9450 4550
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	9350 4700 9350 4500
+Wire Wire Line
+	9450 4400 9450 4450
+Text Label 9850 4400 0    50   ~ 0
+UNLOCK_LED
+Wire Wire Line
+	9300 4400 9450 4400
+Connection ~ 9450 4400
+Text Notes 8450 4450 0    50   ~ 0
+unlock led
+Text Notes 8400 5350 0    50   ~ 0
+door relay
+Text Notes 8450 6400 0    50   ~ 0
+nfc comms
+Wire Wire Line
+	9400 6500 9300 6500
+Wire Wire Line
+	9400 6400 9300 6400
+Text Label 9400 6400 0    50   ~ 0
+TXD
+Text Label 9400 6500 0    50   ~ 0
+RXD
+Wire Wire Line
+	9350 6300 9300 6300
+Wire Wire Line
+	9350 6200 9300 6200
+$Comp
+L power:GND #PWR?
+U 1 1 6290F066
+P 9350 6300
+F 0 "#PWR?" H 9350 6050 50  0001 C CNN
+F 1 "GND" V 9355 6172 50  0000 R CNN
+F 2 "" H 9350 6300 50  0001 C CNN
+F 3 "" H 9350 6300 50  0001 C CNN
+	1    9350 6300
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+3V3 #PWR?
+U 1 1 6290E962
+P 9350 6200
+F 0 "#PWR?" H 9350 6050 50  0001 C CNN
+F 1 "+3V3" V 9365 6328 50  0000 L CNN
+F 2 "" H 9350 6200 50  0001 C CNN
+F 3 "" H 9350 6200 50  0001 C CNN
+	1    9350 6200
+	0    1    1    0   
+$EndComp
+Text Label 9850 5350 0    50   ~ 0
+UNLOCK_PIN
+$Comp
+L Connector:Conn_01x04_Male J?
+U 1 1 625B8421
+P 9100 6300
+F 0 "J?" H 9208 6581 50  0000 C CNN
+F 1 "JST XH-4P" H 9208 6490 50  0000 C CNN
+F 2 "" H 9100 6300 50  0001 C CNN
+F 3 "https://www.amazon.com/GeeBat-460pcs-Connector-Housing-Adapter/dp/B01MCZE2HM/" H 9100 6300 50  0001 C CNN
+	1    9100 6300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9450 4400 9850 4400
 $EndSCHEMATC
