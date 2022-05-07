@@ -46,9 +46,9 @@ L Device:D_Zener_Small D4
 U 1 1 628663B7
 P 7150 3150
 F 0 "D4" V 7104 3218 50  0000 L CNN
-F 1 "Vz=15" V 7195 3218 50  0000 L CNN
-F 2 "" V 7150 3150 50  0001 C CNN
-F 3 "~" V 7150 3150 50  0001 C CNN
+F 1 "1N4743A-TAP" V 7195 3218 50  0000 L CNN
+F 2 "Diode_THT:D_A-405_P2.54mm_Vertical_AnodeUp" V 7150 3150 50  0001 C CNN
+F 3 "https://www.digikey.com/en/products/detail/vishay-general-semiconductor-diodes-division/1N4743A-TAP/8564445?s=N4IgjCBcoLQBxVAYygMwIYBsDOBTANCAPZQDa4YATCALoC%2Bdh1k5YAcgCwDsHAzAIIwAKvwAKtOkA" V 7150 3150 50  0001 C CNN
 	1    7150 3150
 	0    -1   1    0   
 $EndComp
@@ -11178,9 +11178,9 @@ L Device:D_Zener_Small D7
 U 1 1 628549E6
 P 9450 5500
 F 0 "D7" V 9404 5568 50  0000 L CNN
-F 1 "Vz=3v3" V 9495 5568 50  0000 L CNN
-F 2 "" V 9450 5500 50  0001 C CNN
-F 3 "~" V 9450 5500 50  0001 C CNN
+F 1 "1N4728A-TR" V 9495 5568 50  0000 L CNN
+F 2 "Diode_THT:D_A-405_P2.54mm_Vertical_AnodeUp" V 9450 5500 50  0001 C CNN
+F 3 "https://www.digikey.com/en/products/detail/vishay-general-semiconductor-diodes-division/1N4728A-TR/3104058?s=N4IgjCBcoLQBxVAYygMwIYBsDOBTANCAPZQDa4YATCALoC%2Bdh1k5YAcgCwDslcAgjAAqAJVp0gA" V 9450 5500 50  0001 C CNN
 	1    9450 5500
 	0    1    1    0   
 $EndComp
@@ -11235,8 +11235,8 @@ L Device:D_Zener_Small D6
 U 1 1 6279BEE4
 P 9450 4550
 F 0 "D6" V 9404 4618 50  0000 L CNN
-F 1 "Vz=3v3" V 9495 4618 50  0000 L CNN
-F 2 "" V 9450 4550 50  0001 C CNN
+F 1 "1N4728A-TR" V 9495 4618 50  0000 L CNN
+F 2 "Diode_THT:D_A-405_P2.54mm_Vertical_AnodeUp" V 9450 4550 50  0001 C CNN
 F 3 "~" V 9450 4550 50  0001 C CNN
 	1    9450 4550
 	0    1    1    0   
@@ -11350,4 +11350,6 @@ Wire Wire Line
 Connection ~ 7900 3100
 Wire Wire Line
 	2550 6550 2700 6550
+Text Notes 6550 4500 0    50   ~ 0
+protection zeners must be 3v3
 $EndSCHEMATC
