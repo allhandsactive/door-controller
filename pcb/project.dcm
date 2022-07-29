@@ -1,9 +1,0 @@
-EESchema-DOCLIB  Version 2.0
-#
-$CMP NodeMCUv3
-D ESP8266 LoLin v3 module
-K ESP8266 LoLin
-F ${KIPRJMOD}/../docs/NodeMCU-V3.pdf
-$ENDCMP
-#
-#End Doc Library
