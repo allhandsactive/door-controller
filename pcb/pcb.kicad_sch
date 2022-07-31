@@ -6,6 +6,7 @@
 
   (title_block
     (title "Door Controller")
+    (date "2022-07-30")
     (rev "1")
     (company "All Hands Active")
     (comment 3 "Brian Johnson")
