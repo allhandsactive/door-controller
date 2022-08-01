@@ -381,7 +381,6 @@
         "nets": [
           "+3V3",
           "Net-(D5-Pad2)",
-          "Net-(D8-Pad1)",
           "Net-(FH1-Pad2)",
           "VBUS"
         ],
